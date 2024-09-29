@@ -24,6 +24,7 @@ func _physics_process(delta):
 	if not playerId: return
 	
 	direction = Input.get_vector(inputDict.Left, inputDict.Right, inputDict.Up, inputDict.Down)
+	
 	var impulse = direction*15
 	impulse.y = 0
 	velocity += impulse
