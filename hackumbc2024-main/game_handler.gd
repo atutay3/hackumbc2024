@@ -7,6 +7,7 @@ func spawnCharacter(id, spawnPos):
 	var newPlr = player.instantiate()
 	
 	newPlr.playerId = id
+	
 	newPlr.spawnPosition = spawnPos
 	
 	var controlDict
@@ -40,18 +41,18 @@ var player2
 func _respawn(playerId):
 	await get_tree().create_timer(3).timeout
 	if playerId == 1:
-		player1 = spawnCharacter(1, Vector2(-200, 200))
+		player1 = spawnCharacter(1, Vector2(200, 200))
 		player1.kill.connect(_respawn)
 	else:
-		player2 = spawnCharacter(2, Vector2(-300, 200))
+		player2 = spawnCharacter(2, Vector2(800, 200))
 		player2.kill.connect(_respawn)
 
 func _ready():
 	player = load("res://character_body_2d.tscn")
 	main = get_parent()
 	
-	player1 = spawnCharacter(1, Vector2(-200, 200))
-	player2 = spawnCharacter(2, Vector2(-300, 200))
+	player1 = spawnCharacter(1, Vector2(200, 200))
+	player2 = spawnCharacter(2, Vector2(800, 200))
 	
 	player1.kill.connect(_respawn)
 	player2.kill.connect(_respawn)
