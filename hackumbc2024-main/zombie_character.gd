@@ -4,19 +4,29 @@ var direction
 var facingLeft = false
 
 var spawnPosition
-var inputDict
-var playerId
+var angerArea
 
-var speed = 70
+var speed = 30
 var onGround = true
 
+var targetPlayer
+
+var impulse = Vector2(0,0)
+func aggro(body):
+	if body.is_class("CharacterBody2D") and body.get_meta("Player") == true:
+		targetPlayer = body
+
 func _ready():
+	#print("ready")
 	global_position = spawnPosition
+	angerArea.body_entered.connect(aggro)
 
 func _physics_process(delta):
-	if not playerId: return
 	
-	var impulse = direction*15
+	if targetPlayer and is_instance_valid(targetPlayer):
+		impulse = (targetPlayer.position - position).normalized()*4
+	else:
+		impulse = Vector2(0,0)
 	impulse.y = 0
 	velocity += impulse
 	
@@ -36,7 +46,7 @@ func _physics_process(delta):
 		scale = Vector2(1, -1)
 		rotation = PI
 
-var hp = 100
+var hp = 50
 var lastHit = 0
 func damage(amount):
 	hp -= amount
@@ -46,10 +56,11 @@ func damage(amount):
 		call_deferred("queue_free")
 	
 		var particles = $DeathParticleEmitter
+		particles = particles.duplicate()
 		if particles:
 			particles.emitting = true
 			
-			remove_child(particles)
+			#remove_child(particles)
 			particles.position = position
 			get_parent().add_child(particles)
 			await get_tree().create_timer(particles.lifetime).timeout
@@ -57,16 +68,29 @@ func damage(amount):
 			
 		#slowdown effect
 	else:
-		speed = 30
+		speed = 10
 		lastHit = Time.get_ticks_msec()
 		await get_tree().create_timer(1.2).timeout
 		if Time.get_ticks_msec() - lastHit < 1200:
-			speed = 70
+			speed = 30
 
 signal kill
 func _exit_tree() -> void:
-	kill.emit(playerId)
+	kill.emit(self)
 
-
-func _on_area_2d_area_entered(area: Area2D) -> void:
-	pass # Replace with function body.
+var hit = false
+var hitCD = .2
+var hitDamage = 23
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	if body.is_class("CharacterBody2D") and body.get_meta("Player") == true and hit == false:
+		hit = true
+	
+		var impulse = 550
+		if body.velocity.length() < 40: impulse = 750
+		body.velocity += (body.position-position).normalized()*impulse
+		velocity -= (body.position-position).normalized()*impulse
+		body.damage(hitDamage)
+		damage(hitDamage/2)
+		
+		await get_tree().create_timer(hitCD).timeout
+		hit = false

@@ -5,8 +5,8 @@
 [ext_resource type="Script" path="res://line_2d.gd" id="3_04hox"]
 [ext_resource type="Script" path="res://animated_sprite_2d.gd" id="3_4r74i"]
 [ext_resource type="Script" path="res://animation_player.gd" id="3_gikk8"]
-[ext_resource type="Texture2D" uid="uid://ddgcsp2aynhvq" path="res://character/Glock_17_MOD_45154998_(Transparent).png" id="4_p0mi6"]
 [ext_resource type="Script" path="res://animation_player_2.gd" id="5_poxyn"]
+[ext_resource type="Texture2D" uid="uid://dvdmesvigiw0l" path="res://character/zombieSwarm_shotgun.png" id="7_8xe47"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3dmhy"]
 size = Vector2(405.813, 520.489)
@@ -156,9 +156,11 @@ metadata/_snap_enabled = true
 
 [node name="PlayerCharacter" type="CharacterBody2D"]
 script = ExtResource("1_xp8iq")
+metadata/Player = true
+metadata/Bullet = false
 
 [node name="BarrelPoint" type="Node2D" parent="."]
-position = Vector2(93, -15)
+position = Vector2(29, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(0.06, 0.0592308)
@@ -166,6 +168,7 @@ shape = SubResource("RectangleShape2D_3dmhy")
 
 [node name="Player1Image" type="Sprite2D" parent="."]
 z_index = 10
+position = Vector2(0, 2)
 scale = Vector2(0.21, 0.18)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player1Image"]
@@ -182,6 +185,7 @@ script = ExtResource("3_gikk8")
 
 [node name="Player2Image" type="Sprite2D" parent="."]
 z_index = 10
+position = Vector2(0, 2)
 scale = Vector2(0.209, 0.18)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player2Image"]
@@ -224,9 +228,9 @@ initial_velocity_max = 108.28
 
 [node name="GunImage" type="Sprite2D" parent="."]
 z_index = 5
-position = Vector2(-1.39165, 0.5)
-scale = Vector2(0.113892, 0.109756)
-texture = ExtResource("4_p0mi6")
+position = Vector2(-930, 0)
+scale = Vector2(1.89287, 2.67988)
+texture = ExtResource("7_8xe47")
 offset = Vector2(500, 0)
 
 [node name="DeathParticleEmitter" type="CPUParticles2D" parent="."]
