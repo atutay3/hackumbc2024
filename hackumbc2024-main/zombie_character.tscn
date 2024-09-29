@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=3 uid="uid://d0iw7mmwqplo"]
+
+[ext_resource type="Texture2D" uid="uid://43hkdrl8jf4q" path="res://character/3194-steamhappy.png" id="1_u1xhd"]
+[ext_resource type="Script" path="res://zombie_character.gd" id="1_v5e33"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wmjlf"]
+size = Vector2(419.573, 520.489)
+
+[node name="ZombieCharacter" type="CharacterBody2D"]
+script = ExtResource("1_v5e33")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(0.06, 0.0592308)
+shape = SubResource("RectangleShape2D_wmjlf")
+
+[node name="Player1Image" type="Sprite2D" parent="."]
+scale = Vector2(0.190608, 0.193)
+texture = ExtResource("1_u1xhd")
+
+[node name="DeathParticleEmitter" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 40
+lifetime = 0.3
+one_shot = true
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 333.34
+initial_velocity_max = 404.05
+linear_accel_min = -6.06
+linear_accel_max = -2.02
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0.412805, 0)
+scale = Vector2(0.082, 0.08)
+shape = SubResource("RectangleShape2D_wmjlf")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

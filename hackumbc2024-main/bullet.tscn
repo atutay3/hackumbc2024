@@ -20,11 +20,6 @@ texture = ExtResource("2_x14pt")
 scale = Vector2(0.0749751, -0.0231333)
 shape = SubResource("CircleShape2D_yg4ic")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-scale = Vector2(0.0749751, -0.0231333)
-shape = SubResource("CircleShape2D_yg4ic")
-disabled = true
-
 [node name="BulletImpactParticles" type="CPUParticles2D" parent="."]
 emitting = false
 amount = 16

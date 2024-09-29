@@ -4,8 +4,9 @@ var dir
 var spawnPosition
 var spawnRotation
 
-var speed = 1800
-var bulletDamage = 24
+var rng = RandomNumberGenerator.new()
+var speed = rng.randf_range(1000.0, 1200.0)
+var bulletDamage = 9
 
 func _ready():
 	global_position = spawnPosition
@@ -14,6 +15,7 @@ func _ready():
 	queue_free()
 
 func _physics_process(delta):
+	speed -= 20
 	velocity = Vector2(0, -speed).rotated(dir)
 	move_and_slide()
 
@@ -21,6 +23,7 @@ var hit = false
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if hit == true: return
 	if body == self: return
+	if body.get_meta("Player") == true: return
 	
 	hit = true
 	
