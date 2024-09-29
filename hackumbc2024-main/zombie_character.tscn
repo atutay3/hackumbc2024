@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://d0iw7mmwqplo"]
 
-[ext_resource type="Texture2D" uid="uid://43hkdrl8jf4q" path="res://character/3194-steamhappy.png" id="1_u1xhd"]
 [ext_resource type="Script" path="res://zombie_character.gd" id="1_v5e33"]
+[ext_resource type="Texture2D" uid="uid://d2h3dp5vc08o8" path="res://character/zombieSwarm_zombie.png" id="2_86gcp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wmjlf"]
 size = Vector2(419.573, 520.489)
@@ -77,8 +77,11 @@ scale = Vector2(0.06, 0.0592308)
 shape = SubResource("RectangleShape2D_wmjlf")
 
 [node name="Player1Image" type="Sprite2D" parent="."]
-scale = Vector2(0.190608, 0.193)
-texture = ExtResource("1_u1xhd")
+position = Vector2(-1, -12)
+scale = Vector2(3.56328, 3.60799)
+texture = ExtResource("2_86gcp")
+hframes = 2
+vframes = 2
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player1Image"]
 scale = Vector2(10, 10)
@@ -108,7 +111,7 @@ linear_accel_max = -2.02
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0.412805, 0)
+position = Vector2(1, -8)
 scale = Vector2(0.1, 0.098)
 shape = SubResource("RectangleShape2D_wmjlf")
 metadata/Player = false

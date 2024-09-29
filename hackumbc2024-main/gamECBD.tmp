@@ -1,0 +1,369 @@
+[gd_scene load_steps=13 format=4 uid="uid://dtfo561jh8teg"]
+
+[ext_resource type="Script" path="res://game_handler.gd" id="1_wx0hl"]
+[ext_resource type="Texture2D" uid="uid://ct2r7me3q4gyy" path="res://tilemap_scaled_4x.png" id="2_ytb7s"]
+[ext_resource type="AudioStream" uid="uid://dh4jn3jklg7kp" path="res://zombieSwarmTheme.wav" id="3_3gy6s"]
+[ext_resource type="Script" path="res://audio_stream_player.gd" id="4_rbrlq"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_i7lck"]
+texture = ExtResource("2_ytb7s")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/terrain_set = 0
+1:0/0 = 0
+1:0/0/terrain_set = 0
+2:0/0 = 0
+2:0/0/terrain_set = 0
+3:0/0 = 0
+3:0/0/terrain_set = 0
+4:0/size_in_atlas = Vector2i(3, 1)
+4:0/0 = 0
+4:0/0/terrain_set = 0
+7:0/size_in_atlas = Vector2i(3, 1)
+7:0/0 = 0
+7:0/0/terrain_set = 0
+10:0/0 = 0
+10:0/0/terrain_set = 0
+0:1/0 = 0
+0:1/0/terrain_set = 0
+1:1/0 = 0
+1:1/0/terrain_set = 0
+2:1/0 = 0
+2:1/0/terrain_set = 0
+3:1/0 = 0
+3:1/0/terrain_set = 0
+11:1/0 = 0
+11:1/0/terrain_set = 0
+0:2/0 = 0
+0:2/0/terrain_set = 0
+1:2/0 = 0
+1:2/0/terrain_set = 0
+2:2/0 = 0
+2:2/0/terrain_set = 0
+3:2/0 = 0
+3:2/0/terrain_set = 0
+10:2/0 = 0
+10:2/0/terrain_set = 0
+1:3/0 = 0
+1:3/0/terrain_set = 0
+2:3/0 = 0
+2:3/0/terrain_set = 0
+3:3/0 = 0
+3:3/0/terrain_set = 0
+11:3/0 = 0
+11:3/0/terrain_set = 0
+3:4/0 = 0
+3:4/0/terrain_set = 0
+4:4/0 = 0
+4:4/0/terrain_set = 0
+5:4/0 = 0
+5:4/0/terrain_set = 0
+3:5/0 = 0
+3:5/0/terrain_set = 0
+4:5/0 = 0
+4:5/0/terrain_set = 0
+5:5/0 = 0
+5:5/0/terrain_set = 0
+0:3/0 = 0
+0:3/0/terrain_set = 0
+4:1/size_in_atlas = Vector2i(3, 1)
+4:1/0 = 0
+4:1/0/terrain_set = 0
+4:2/size_in_atlas = Vector2i(3, 1)
+4:2/0 = 0
+4:2/0/terrain_set = 0
+4:3/size_in_atlas = Vector2i(3, 1)
+4:3/0 = 0
+4:3/0/terrain_set = 0
+7:1/size_in_atlas = Vector2i(3, 1)
+7:1/0 = 0
+7:1/0/terrain_set = 0
+7:2/size_in_atlas = Vector2i(3, 1)
+7:2/0 = 0
+7:2/0/terrain_set = 0
+7:3/size_in_atlas = Vector2i(3, 1)
+7:3/0 = 0
+7:3/0/terrain_set = 0
+10:1/0 = 0
+10:1/0/terrain_set = 0
+10:3/0 = 0
+10:3/0/terrain_set = 0
+0:4/size_in_atlas = Vector2i(3, 1)
+0:4/0 = 0
+0:4/0/terrain_set = 0
+0:5/size_in_atlas = Vector2i(3, 1)
+0:5/0 = 0
+0:5/0/terrain_set = 0
+
+[sub_resource type="TileSet" id="TileSet_rn1gy"]
+tile_size = Vector2i(32, 32)
+terrain_set_0/mode = 0
+terrain_set_0/terrain_0/name = "Terrain 0"
+terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
+sources/2 = SubResource("TileSetAtlasSource_i7lck")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_orr2t"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ujrda"]
+size = Vector2(29, 34)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_m5j1g"]
+a = Vector2(-52, 32)
+b = Vector2(-26, 6)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_2lxdd"]
+b = Vector2(23, 26)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_chmsy"]
+a = Vector2(9, 0)
+b = Vector2(-29, 0)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fds8i"]
+size = Vector2(1235, 97)
+
+[node name="GameHandler" type="Node2D"]
+script = ExtResource("1_wx0hl")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
+
+[node name="foreground" type="TileMapLayer" parent="."]
+top_level = true
+position = Vector2(-322, -224)
+tile_map_data = PackedByteArray("AAAQAAcAAgAFAAUAAAARAAcAAgAFAAUAAAASAAcAAgAFAAUAAAAMAAgAAgAEAAUAAAAGAAcAAgAFAAUAAAAHAAcAAgAFAAUAAAAIAAcAAgAFAAUAAAAJAAcAAgAFAAUAAAAMAAMAAgAFAAUAAAALAAMAAgAFAAUAAAAKAAMAAgAFAAUAAAAKAAsAAgAFAAUAAAALAAsAAgAFAAUAAAAMAAsAAgAFAAUAAAAJAAsAAgAFAAUAAAANAAMAAgAFAAUAAAABAAsAAgAFAAUAAAACAAsAAgAFAAUAAAADAAsAAgAFAAUAAAAHAAwAAgADAAQAAAAJAAwAAgADAAUAAAAJAAQAAgAFAAQAAAAIAAQAAgAEAAQAAAALAAwAAgAFAAQAAAAKAAwAAgAEAAQAAAAGAAQAAgAEAAUAAAAGAAwAAgAEAAUAAAAPAAwAAgAKAAMAAAAPAAgAAgAKAAMAAAAPAAQAAgAKAAMAAAAEAAQAAgAKAAEAAAAEAAgAAgAKAAEAAAAEAAwAAgAKAAEAAAAMAAwAAgAEAAQAAAANAAwAAgAFAAQAAAAGAAgAAgAEAAQAAAAHAAgAAgAFAAQAAAAJAAgAAgAEAAQAAAAKAAgAAgAFAAQAAAANAAgAAgADAAUAAAAMAAQAAgAEAAQAAAANAAQAAgAFAAQAAAAKAAQAAgADAAQAAAAIAAgAAgADAAQAAAAFAAQAAgADAAUAAAA=")
+tile_set = SubResource("TileSet_rn1gy")
+collision_enabled = false
+
+[node name="buildingForeground2" type="TileMapLayer" parent="."]
+top_level = true
+position = Vector2(-322, -224)
+tile_map_data = PackedByteArray("AAAQAAcAAgAFAAUAAAARAAcAAgAFAAUAAAASAAcAAgAFAAUAAAABAAMAAgAFAAUAAAACAAMAAgAFAAUAAAADAAMAAgAFAAUAAAAMAAgAAgAEAAUAAAAGAAcAAgAFAAUAAAAHAAcAAgAFAAUAAAAIAAcAAgAFAAUAAAAJAAcAAgAFAAUAAAAMAAMAAgAFAAUAAAALAAMAAgAFAAUAAAAKAAMAAgAFAAUAAAAKAAsAAgAFAAUAAAALAAsAAgAFAAUAAAAMAAsAAgAFAAUAAAAJAAsAAgAFAAUAAAANAAMAAgAFAAUAAAABAAsAAgAFAAUAAAACAAsAAgAFAAUAAAADAAsAAgAFAAUAAAAHAAwAAgADAAQAAAAJAAwAAgADAAUAAAAJAAQAAgAFAAQAAAAIAAQAAgAEAAQAAAALAAwAAgAFAAQAAAAKAAwAAgAEAAQAAAAGAAQAAgAEAAUAAAAGAAwAAgAEAAUAAAAPAAwAAgAKAAMAAAAPAAgAAgAKAAMAAAAPAAQAAgAKAAMAAAAEAAQAAgAKAAEAAAAEAAgAAgAKAAEAAAAEAAwAAgAKAAEAAAAMAAwAAgAEAAQAAAANAAwAAgAFAAQAAAAGAAgAAgAEAAQAAAAHAAgAAgAFAAQAAAAJAAgAAgAEAAQAAAAKAAgAAgAFAAQAAAANAAgAAgADAAUAAAAMAAQAAgAEAAQAAAANAAQAAgAFAAQAAAAKAAQAAgADAAQAAAAIAAgAAgADAAQAAAAFAAQAAgADAAUAAAA=")
+tile_set = SubResource("TileSet_rn1gy")
+collision_enabled = false
+
+[node name="buildingBackground" type="TileMapLayer" parent="."]
+position = Vector2(-322, -224)
+tile_map_data = PackedByteArray("AAAAAAIAAgAAAAIAAAAAAAMAAgAAAAAAAAAAAAQAAgAAAAAAAAAAAAUAAgAAAAAAAAAAAAYAAgAAAAAAAAAEAAUAAgAAAAEAAAAFAAUAAgACAAAAAAAIAAUAAgACAAAAAAAJAAUAAgACAAAAAAALAAUAAgACAAAAAAAMAAUAAgACAAAAAAANAAUAAgACAAAAAAAGAAUAAgADAAAAAAAHAAUAAgADAAAAAAAKAAUAAgADAAAAAAAOAAUAAgADAAAAAAAEAAQAAgALAAEAAAAEAAMAAgAKAAAAAAAEAAIAAgAAAAIAAAAFAAYAAgACAAEAAAAGAAYAAgACAAEAAAAHAAYAAgACAAEAAAAIAAYAAgACAAEAAAAJAAYAAgACAAEAAAAKAAYAAgACAAEAAAALAAYAAgACAAEAAAAMAAYAAgACAAEAAAANAAYAAgACAAEAAAAOAAYAAgACAAEAAAAFAAIAAgACAAEAAAAGAAIAAgACAAEAAAAHAAIAAgACAAEAAAAIAAIAAgACAAEAAAAJAAIAAgACAAEAAAAFAAMAAgACAAIAAAAGAAMAAgACAAIAAAAHAAMAAgACAAIAAAAIAAMAAgACAAIAAAAJAAMAAgACAAIAAAAJAAQAAgADAAIAAAAIAAQAAgADAAIAAAAHAAQAAgADAAIAAAAGAAQAAgADAAIAAAAFAAQAAgADAAIAAAAKAAQAAgADAAIAAAALAAQAAgADAAIAAAAMAAQAAgADAAIAAAANAAQAAgADAAIAAAAOAAQAAgADAAIAAAAPAAMAAgAKAAIAAAAPAAIAAgABAAIAAAAOAAIAAgACAAEAAAANAAIAAgACAAEAAAAMAAIAAgACAAEAAAALAAIAAgACAAEAAAAKAAIAAgACAAEAAAAKAAMAAgACAAIAAAALAAMAAgACAAIAAAAMAAMAAgACAAIAAAANAAMAAgACAAIAAAAOAAMAAgACAAIAAAAPAAQAAgALAAMAAAAPAAUAAgABAAEAAAAQAAUAAgACAAAAAAARAAUAAgADAAAAAAASAAUAAgADAAAAAAATAAIAAgABAAIAAAATAAMAAgABAAAAAAATAAQAAgABAAAAAAATAAUAAgABAAAAAAATAAYAAgABAAAAAAACAAUAAgAHAAAAAAACAAYAAgAHAAEAAAACAAcAAgAHAAIAAAACAAgAAgAHAAMAAAADAAQAAgADAAIAAAACAAQAAgADAAIAAAABAAQAAgADAAIAAAABAAMAAgACAAIAAAACAAMAAgACAAIAAAADAAMAAgACAAIAAAADAAIAAgACAAEAAAACAAIAAgACAAEAAAABAAIAAgACAAEAAAABAAkAAgACAAAAAAACAAkAAgADAAAAAAADAAkAAgADAAAAAAAAAAcAAgAAAAAAAAAAAAgAAgAAAAAAAAATAAcAAgABAAAAAAATAAgAAgABAAAAAAATAAkAAgABAAAAAAATAAoAAgABAAAAAAATAAsAAgABAAAAAAAAAAkAAgAAAAAAAAAAAAoAAgAAAAAAAAAAAAsAAgAAAAAAAAAAAAwAAgAAAAAAAAAEAAkAAgAAAAEAAAAPAAkAAgABAAEAAAARAAkAAgAEAAAAAAARAAoAAgAEAAEAAAARAAsAAgAEAAIAAAARAAwAAgAEAAMAAAAFAAkAAgACAAAAAAAJAAkAAgADAAAAAAAIAAkAAgACAAAAAAALAAkAAgADAAAAAAAMAAkAAgACAAAAAAANAAkAAgACAAAAAAAOAAkAAgADAAAAAAAKAAkAAgADAAAAAAAHAAkAAgADAAAAAAAGAAkAAgADAAAAAAARAAMAAgAAAAQAAAARAAQAAgAAAAUAAAAQAAIAAgACAAEAAAARAAIAAgACAAEAAAASAAIAAgACAAEAAAATAAEAAgADAAEAAAASAAEAAgADAAEAAAARAAEAAgADAAEAAAAQAAEAAgADAAEAAAAPAAEAAgADAAEAAAAOAAEAAgADAAEAAAANAAEAAgADAAEAAAAMAAEAAgADAAEAAAALAAEAAgADAAEAAAAKAAEAAgADAAEAAAAJAAEAAgADAAEAAAAIAAEAAgADAAEAAAAHAAEAAgADAAEAAAAGAAEAAgADAAEAAAAFAAEAAgADAAEAAAAEAAEAAgADAAEAAAADAAEAAgADAAEAAAACAAEAAgADAAEAAAABAAEAAgADAAEAAAAAAAEAAgADAAEAAAAPAAYAAgABAAIAAAAPAAcAAgAKAAIAAAAEAAYAAgAAAAIAAAAEAAcAAgAKAAAAAAAPAAgAAgALAAMAAAAEAAgAAgALAAEAAAASAA0AAgADAAAAAAARAA0AAgACAAAAAAAQAA0AAgADAAAAAAATAAwAAgABAAAAAAATAA0AAgABAAEAAAAPAAoAAgABAAIAAAAOAAoAAgACAAEAAAANAAoAAgACAAEAAAAMAAoAAgACAAEAAAALAAoAAgACAAEAAAAKAAoAAgACAAEAAAAJAAoAAgACAAEAAAAIAAoAAgACAAEAAAAHAAoAAgACAAEAAAAGAAoAAgACAAEAAAAFAAoAAgACAAEAAAAOAAcAAgACAAIAAAANAAcAAgACAAIAAAAMAAcAAgACAAIAAAALAAcAAgACAAIAAAAKAAcAAgACAAIAAAAJAAcAAgACAAIAAAAIAAcAAgACAAIAAAAHAAcAAgACAAIAAAAGAAcAAgACAAIAAAAFAAcAAgACAAIAAAAFAAgAAgADAAIAAAAGAAgAAgADAAIAAAAHAAgAAgADAAIAAAAIAAgAAgADAAIAAAAJAAgAAgADAAIAAAAKAAgAAgADAAIAAAALAAgAAgADAAIAAAAMAAgAAgADAAIAAAANAAgAAgADAAIAAAAOAAgAAgADAAIAAAAOAAsAAgACAAIAAAANAAsAAgACAAIAAAAMAAsAAgACAAIAAAALAAsAAgACAAIAAAAKAAsAAgACAAIAAAAJAAsAAgACAAIAAAAIAAsAAgACAAIAAAAHAAsAAgACAAIAAAAGAAsAAgACAAIAAAAFAAsAAgACAAIAAAAFAAwAAgADAAIAAAAGAAwAAgADAAIAAAAHAAwAAgADAAIAAAAIAAwAAgADAAIAAAAJAAwAAgADAAIAAAAKAAwAAgADAAIAAAALAAwAAgADAAIAAAAMAAwAAgADAAIAAAANAAwAAgADAAIAAAAOAAwAAgADAAIAAAAPAAsAAgAKAAIAAAAPAAwAAgALAAMAAAAEAAoAAgAAAAIAAAAEAAwAAgALAAEAAAAEAAsAAgAKAAAAAAAOAA0AAgADAAAAAAANAA0AAgADAAAAAAAMAA0AAgADAAAAAAAJAA0AAgADAAAAAAAIAA0AAgADAAAAAAAFAA0AAgADAAAAAAAGAA0AAgACAAAAAAAHAA0AAgACAAAAAAALAA0AAgACAAAAAAAKAA0AAgACAAAAAAAPAA0AAgABAAEAAAAEAA0AAgAAAAEAAAADAA0AAgACAAAAAAACAA0AAgADAAAAAAABAA0AAgADAAAAAAAAAA0AAgAAAAEAAAADAAoAAgACAAEAAAACAAoAAgACAAEAAAABAAoAAgACAAEAAAADAAwAAgADAAIAAAACAAwAAgADAAIAAAABAAwAAgADAAIAAAABAAsAAgACAAIAAAACAAsAAgACAAIAAAADAAsAAgACAAIAAAASAAgAAgADAAIAAAARAAgAAgADAAIAAAAQAAgAAgADAAIAAAAQAAcAAgACAAIAAAARAAcAAgACAAIAAAASAAcAAgACAAIAAAAQAAYAAgACAAEAAAARAAYAAgACAAEAAAASAAYAAgACAAEAAAATAA4AAgADAAEAAAASAA4AAgADAAEAAAARAA4AAgADAAEAAAAQAA4AAgADAAEAAAAPAA4AAgADAAEAAAAOAA4AAgADAAEAAAANAA4AAgADAAEAAAAMAA4AAgADAAEAAAALAA4AAgADAAEAAAAKAA4AAgADAAEAAAAJAA4AAgADAAEAAAAIAA4AAgADAAEAAAAHAA4AAgADAAEAAAAGAA4AAgADAAEAAAAFAA4AAgADAAEAAAAEAA4AAgADAAEAAAADAA4AAgADAAEAAAACAA4AAgADAAEAAAABAA4AAgADAAEAAAAAAA4AAgADAAEAAAA=")
+tile_set = SubResource("TileSet_rn1gy")
+collision_enabled = false
+
+[node name="Collision" type="Node" parent="."]
+
+[node name="Walls" type="StaticBody2D" parent="Collision"]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collision/Walls"]
+position = Vector2(-307, 31)
+scale = Vector2(1.4857, 21.1499)
+shape = SubResource("RectangleShape2D_orr2t")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Collision/Walls"]
+position = Vector2(-7.00002, 221)
+scale = Vector2(33.0857, 2.94988)
+shape = SubResource("RectangleShape2D_orr2t")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Collision/Walls"]
+position = Vector2(-8, -159)
+scale = Vector2(33.0857, 2.94988)
+shape = SubResource("RectangleShape2D_orr2t")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Collision/Walls"]
+position = Vector2(138, -34)
+scale = Vector2(33.0857, 2.94988)
+shape = SubResource("RectangleShape2D_orr2t")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Collision/Walls"]
+position = Vector2(303, 37)
+scale = Vector2(1.4857, 21.1499)
+shape = SubResource("RectangleShape2D_orr2t")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="Collision/Walls"]
+position = Vector2(-142, 95)
+scale = Vector2(33.0857, 2.94988)
+shape = SubResource("RectangleShape2D_orr2t")
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="Collision/Walls"]
+position = Vector2(174.5, 5)
+shape = SubResource("RectangleShape2D_ujrda")
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="Collision/Walls"]
+position = Vector2(174, 132)
+shape = SubResource("RectangleShape2D_ujrda")
+
+[node name="CollisionShape2D9" type="CollisionShape2D" parent="Collision/Walls"]
+position = Vector2(-178, 132)
+shape = SubResource("RectangleShape2D_ujrda")
+
+[node name="CollisionShape2D10" type="CollisionShape2D" parent="Collision/Walls"]
+position = Vector2(-177, 4)
+shape = SubResource("RectangleShape2D_ujrda")
+
+[node name="CollisionShape2D11" type="CollisionShape2D" parent="Collision/Walls"]
+position = Vector2(-178, -123)
+shape = SubResource("RectangleShape2D_ujrda")
+
+[node name="CollisionShape2D12" type="CollisionShape2D" parent="Collision/Walls"]
+position = Vector2(175, -127)
+shape = SubResource("RectangleShape2D_ujrda")
+
+[node name="Stair1" type="StaticBody2D" parent="Collision"]
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Collision/Stair1"]
+position = Vector2(279, 155)
+shape = SubResource("SegmentShape2D_m5j1g")
+one_way_collision = true
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="Collision/Stair1"]
+position = Vector2(280, 93)
+shape = SubResource("SegmentShape2D_m5j1g")
+one_way_collision = true
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="Collision/Stair1"]
+position = Vector2(228, 130)
+shape = SubResource("SegmentShape2D_2lxdd")
+one_way_collision = true
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="Collision/Stair1"]
+position = Vector2(228, 65)
+shape = SubResource("SegmentShape2D_2lxdd")
+one_way_collision = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collision/Stair1"]
+position = Vector2(219, 130)
+shape = SubResource("SegmentShape2D_chmsy")
+one_way_collision = true
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Collision/Stair1"]
+position = Vector2(219, 66)
+shape = SubResource("SegmentShape2D_chmsy")
+one_way_collision = true
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Collision/Stair1"]
+position = Vector2(282, 99)
+shape = SubResource("SegmentShape2D_chmsy")
+one_way_collision = true
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Collision/Stair1"]
+position = Vector2(282, 162)
+shape = SubResource("SegmentShape2D_chmsy")
+one_way_collision = true
+
+[node name="Stair2" type="StaticBody2D" parent="Collision"]
+position = Vector2(-481, -96)
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Collision/Stair2"]
+position = Vector2(277, 26)
+shape = SubResource("SegmentShape2D_m5j1g")
+one_way_collision = true
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="Collision/Stair2"]
+position = Vector2(280, 93)
+shape = SubResource("SegmentShape2D_m5j1g")
+one_way_collision = true
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="Collision/Stair2"]
+position = Vector2(228, 130)
+shape = SubResource("SegmentShape2D_2lxdd")
+one_way_collision = true
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="Collision/Stair2"]
+position = Vector2(228, 65)
+shape = SubResource("SegmentShape2D_2lxdd")
+one_way_collision = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collision/Stair2"]
+position = Vector2(219, 130)
+shape = SubResource("SegmentShape2D_chmsy")
+one_way_collision = true
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Collision/Stair2"]
+position = Vector2(219, 66)
+shape = SubResource("SegmentShape2D_chmsy")
+one_way_collision = true
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Collision/Stair2"]
+position = Vector2(282, 99)
+shape = SubResource("SegmentShape2D_chmsy")
+one_way_collision = true
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Collision/Stair2"]
+position = Vector2(280, 33)
+shape = SubResource("SegmentShape2D_chmsy")
+one_way_collision = true
+
+[node name="ZombieAngerRange1" type="Area2D" parent="Collision"]
+position = Vector2(359, -6)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collision/ZombieAngerRange1"]
+position = Vector2(82.5, 159.5)
+shape = SubResource("RectangleShape2D_fds8i")
+
+[node name="ZombieAngerRange2" type="Area2D" parent="Collision"]
+position = Vector2(830, -137)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collision/ZombieAngerRange2"]
+position = Vector2(-43, 159.5)
+shape = SubResource("RectangleShape2D_fds8i")
+
+[node name="ZombieAngerRange3" type="Area2D" parent="Collision"]
+position = Vector2(-126, -274)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collision/ZombieAngerRange3"]
+position = Vector2(-43, 159.5)
+shape = SubResource("RectangleShape2D_fds8i")
+
+[node name="ZombieSpawnLocations" type="Node" parent="."]
+
+[node name="Zone1" type="Node" parent="ZombieSpawnLocations"]
+
+[node name="Node2D6" type="Node2D" parent="ZombieSpawnLocations/Zone1"]
+position = Vector2(18, 156)
+
+[node name="Node2D7" type="Node2D" parent="ZombieSpawnLocations/Zone1"]
+position = Vector2(102, 147)
+
+[node name="Zone2" type="Node" parent="ZombieSpawnLocations"]
+
+[node name="Node2D" type="Node2D" parent="ZombieSpawnLocations/Zone2"]
+position = Vector2(-130, 23)
+
+[node name="Node2D2" type="Node2D" parent="ZombieSpawnLocations/Zone2"]
+position = Vector2(-70, 23)
+
+[node name="Node2D3" type="Node2D" parent="ZombieSpawnLocations/Zone2"]
+position = Vector2(7, 25)
+
+[node name="Node2D4" type="Node2D" parent="ZombieSpawnLocations/Zone2"]
+position = Vector2(59, 22)
+
+[node name="Node2D5" type="Node2D" parent="ZombieSpawnLocations/Zone2"]
+position = Vector2(120, 22)
+
+[node name="Zone3" type="Node" parent="ZombieSpawnLocations"]
+
+[node name="Node2D6" type="Node2D" parent="ZombieSpawnLocations/Zone3"]
+position = Vector2(115, -108)
+
+[node name="Node2D7" type="Node2D" parent="ZombieSpawnLocations/Zone3"]
+position = Vector2(65, -104)
+
+[node name="Node2D8" type="Node2D" parent="ZombieSpawnLocations/Zone3"]
+position = Vector2(7, -107)
+
+[node name="Node2D9" type="Node2D" parent="ZombieSpawnLocations/Zone3"]
+position = Vector2(-53, -104)
+
+[node name="Node2D10" type="Node2D" parent="ZombieSpawnLocations/Zone3"]
+position = Vector2(-109, -108)
+
+[node name="Node2D11" type="Node2D" parent="ZombieSpawnLocations/Zone3"]
+position = Vector2(221, -105)
+
+[node name="Node2D12" type="Node2D" parent="ZombieSpawnLocations/Zone3"]
+position = Vector2(265, -106)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_3gy6s")
+script = ExtResource("4_rbrlq")
+
+[connection signal="body_entered" from="Collision/ZombieAngerRange1" to="." method="_on_zombie_anger_range_1_body_entered"]
