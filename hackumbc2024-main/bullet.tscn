@@ -1,0 +1,41 @@
+[gd_scene load_steps=4 format=3 uid="uid://hxdsxwawrtd7"]
+
+[ext_resource type="Script" path="res://bullet.gd" id="1_dnush"]
+[ext_resource type="Texture2D" uid="uid://djdtngulwnjh3" path="res://character/bullet.png" id="2_x14pt"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yg4ic"]
+radius = 154.004
+
+[node name="Bullet" type="CharacterBody2D"]
+scale = Vector2(0.994568, 0.97739)
+script = ExtResource("1_dnush")
+
+[node name="Bullet" type="Sprite2D" parent="."]
+scale = Vector2(0.560618, 0.369662)
+texture = ExtResource("2_x14pt")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+scale = Vector2(0.0749751, -0.0231333)
+shape = SubResource("CircleShape2D_yg4ic")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(0.0749751, -0.0231333)
+shape = SubResource("CircleShape2D_yg4ic")
+disabled = true
+
+[node name="BulletImpactParticles" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 16
+lifetime = 0.16
+one_shot = true
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 171.72
+initial_velocity_max = 282.84
+linear_accel_min = -6.06
+linear_accel_max = -2.02
+
+[connection signal="tree_exiting" from="." to="." method="_on_tree_exiting"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
