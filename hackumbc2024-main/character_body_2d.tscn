@@ -31,6 +31,33 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Animation" id="Animation_irdaq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"p1 move"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
 [sub_resource type="Animation" id="Animation_xyu7t"]
 resource_name = "walk p1"
 length = 0.2
@@ -59,33 +86,6 @@ tracks/1/keys = {
 "values": [0, 1]
 }
 
-[sub_resource type="Animation" id="Animation_irdaq"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"p1 move"]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_r8b1v"]
 _data = {
 "RESET": SubResource("Animation_irdaq"),
@@ -106,14 +106,15 @@ metadata/_snap_enabled = true
 script = ExtResource("1_xp8iq")
 
 [node name="BarrelPoint" type="Node2D" parent="."]
-position = Vector2(130, -25)
+position = Vector2(93, -15)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(0.06, 0.0592308)
 shape = SubResource("RectangleShape2D_3dmhy")
 
 [node name="Player1Image" type="Sprite2D" parent="."]
-scale = Vector2(0.550607, 0.473)
+z_index = 10
+scale = Vector2(0.291, 0.25)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player1Image"]
 scale = Vector2(10, 10)
@@ -129,8 +130,8 @@ libraries = {
 anim_player = NodePath("../AnimationPlayer")
 
 [node name="Player2Image" type="Sprite2D" parent="."]
-visible = false
-scale = Vector2(1, 0.859)
+z_index = 10
+scale = Vector2(0.407, 0.35)
 texture = ExtResource("3_jlx8m")
 
 [node name="Trail" type="Line2D" parent="."]
@@ -160,8 +161,9 @@ initial_velocity_min = 63.7
 initial_velocity_max = 108.28
 
 [node name="GunImage" type="Sprite2D" parent="."]
-z_index = -38
-scale = Vector2(0.167272, 0.176924)
+z_index = 5
+position = Vector2(-1.39165, 0.5)
+scale = Vector2(0.113892, 0.109756)
 texture = ExtResource("4_p0mi6")
 offset = Vector2(500, 0)
 

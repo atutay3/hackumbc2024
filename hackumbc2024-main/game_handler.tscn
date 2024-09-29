@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=4 uid="uid://dtfo561jh8teg"]
+[gd_scene load_steps=11 format=4 uid="uid://dtfo561jh8teg"]
 
 [ext_resource type="Script" path="res://game_handler.gd" id="1_wx0hl"]
 [ext_resource type="Texture2D" uid="uid://ct2r7me3q4gyy" path="res://tilemap_scaled_4x.png" id="2_ytb7s"]
@@ -100,6 +100,25 @@ terrain_set_0/terrain_0/name = "Terrain 0"
 terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
 sources/2 = SubResource("TileSetAtlasSource_i7lck")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_orr2t"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ujrda"]
+size = Vector2(29, 34)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_m5j1g"]
+a = Vector2(-52, 32)
+b = Vector2(-26, 6)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_2lxdd"]
+b = Vector2(23, 26)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_chmsy"]
+a = Vector2(9, 0)
+b = Vector2(-29, 0)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fds8i"]
+size = Vector2(242, 97)
+
 [node name="GameHandler" type="Node2D"]
 script = ExtResource("1_wx0hl")
 
@@ -111,14 +130,188 @@ top_level = true
 position = Vector2(-322, -224)
 tile_map_data = PackedByteArray("AAAQAAcAAgAFAAUAAAARAAcAAgAFAAUAAAASAAcAAgAFAAUAAAAMAAgAAgAEAAUAAAAGAAcAAgAFAAUAAAAHAAcAAgAFAAUAAAAIAAcAAgAFAAUAAAAJAAcAAgAFAAUAAAAMAAMAAgAFAAUAAAALAAMAAgAFAAUAAAAKAAMAAgAFAAUAAAAKAAsAAgAFAAUAAAALAAsAAgAFAAUAAAAMAAsAAgAFAAUAAAAJAAsAAgAFAAUAAAANAAMAAgAFAAUAAAABAAsAAgAFAAUAAAACAAsAAgAFAAUAAAADAAsAAgAFAAUAAAAHAAwAAgADAAQAAAAJAAwAAgADAAUAAAAJAAQAAgAFAAQAAAAIAAQAAgAEAAQAAAALAAwAAgAFAAQAAAAKAAwAAgAEAAQAAAAGAAQAAgAEAAUAAAAGAAwAAgAEAAUAAAAPAAwAAgAKAAMAAAAPAAgAAgAKAAMAAAAPAAQAAgAKAAMAAAAEAAQAAgAKAAEAAAAEAAgAAgAKAAEAAAAEAAwAAgAKAAEAAAAMAAwAAgAEAAQAAAANAAwAAgAFAAQAAAAGAAgAAgAEAAQAAAAHAAgAAgAFAAQAAAAJAAgAAgAEAAQAAAAKAAgAAgAFAAQAAAANAAgAAgADAAUAAAAMAAQAAgAEAAQAAAANAAQAAgAFAAQAAAAKAAQAAgADAAQAAAAIAAgAAgADAAQAAAAFAAQAAgADAAUAAAA=")
 tile_set = SubResource("TileSet_rn1gy")
+collision_enabled = false
 
 [node name="buildingForeground2" type="TileMapLayer" parent="."]
 top_level = true
 position = Vector2(-322, -224)
 tile_map_data = PackedByteArray("AAAQAAcAAgAFAAUAAAARAAcAAgAFAAUAAAASAAcAAgAFAAUAAAABAAMAAgAFAAUAAAACAAMAAgAFAAUAAAADAAMAAgAFAAUAAAAMAAgAAgAEAAUAAAAGAAcAAgAFAAUAAAAHAAcAAgAFAAUAAAAIAAcAAgAFAAUAAAAJAAcAAgAFAAUAAAAMAAMAAgAFAAUAAAALAAMAAgAFAAUAAAAKAAMAAgAFAAUAAAAKAAsAAgAFAAUAAAALAAsAAgAFAAUAAAAMAAsAAgAFAAUAAAAJAAsAAgAFAAUAAAANAAMAAgAFAAUAAAABAAsAAgAFAAUAAAACAAsAAgAFAAUAAAADAAsAAgAFAAUAAAAHAAwAAgADAAQAAAAJAAwAAgADAAUAAAAJAAQAAgAFAAQAAAAIAAQAAgAEAAQAAAALAAwAAgAFAAQAAAAKAAwAAgAEAAQAAAAGAAQAAgAEAAUAAAAGAAwAAgAEAAUAAAAPAAwAAgAKAAMAAAAPAAgAAgAKAAMAAAAPAAQAAgAKAAMAAAAEAAQAAgAKAAEAAAAEAAgAAgAKAAEAAAAEAAwAAgAKAAEAAAAMAAwAAgAEAAQAAAANAAwAAgAFAAQAAAAGAAgAAgAEAAQAAAAHAAgAAgAFAAQAAAAJAAgAAgAEAAQAAAAKAAgAAgAFAAQAAAANAAgAAgADAAUAAAAMAAQAAgAEAAQAAAANAAQAAgAFAAQAAAAKAAQAAgADAAQAAAAIAAgAAgADAAQAAAAFAAQAAgADAAUAAAA=")
 tile_set = SubResource("TileSet_rn1gy")
+collision_enabled = false
 
 [node name="buildingBackground" type="TileMapLayer" parent="."]
 position = Vector2(-322, -224)
 tile_map_data = PackedByteArray("AAAAAAIAAgAAAAIAAAAAAAMAAgAAAAAAAAAAAAQAAgAAAAAAAAAAAAUAAgAAAAAAAAAAAAYAAgAAAAAAAAAEAAUAAgAAAAEAAAAFAAUAAgACAAAAAAAIAAUAAgACAAAAAAAJAAUAAgACAAAAAAALAAUAAgACAAAAAAAMAAUAAgACAAAAAAANAAUAAgACAAAAAAAGAAUAAgADAAAAAAAHAAUAAgADAAAAAAAKAAUAAgADAAAAAAAOAAUAAgADAAAAAAAEAAQAAgALAAEAAAAEAAMAAgAKAAAAAAAEAAIAAgAAAAIAAAAFAAYAAgACAAEAAAAGAAYAAgACAAEAAAAHAAYAAgACAAEAAAAIAAYAAgACAAEAAAAJAAYAAgACAAEAAAAKAAYAAgACAAEAAAALAAYAAgACAAEAAAAMAAYAAgACAAEAAAANAAYAAgACAAEAAAAOAAYAAgACAAEAAAAFAAIAAgACAAEAAAAGAAIAAgACAAEAAAAHAAIAAgACAAEAAAAIAAIAAgACAAEAAAAJAAIAAgACAAEAAAAFAAMAAgACAAIAAAAGAAMAAgACAAIAAAAHAAMAAgACAAIAAAAIAAMAAgACAAIAAAAJAAMAAgACAAIAAAAJAAQAAgADAAIAAAAIAAQAAgADAAIAAAAHAAQAAgADAAIAAAAGAAQAAgADAAIAAAAFAAQAAgADAAIAAAAKAAQAAgADAAIAAAALAAQAAgADAAIAAAAMAAQAAgADAAIAAAANAAQAAgADAAIAAAAOAAQAAgADAAIAAAAPAAMAAgAKAAIAAAAPAAIAAgABAAIAAAAOAAIAAgACAAEAAAANAAIAAgACAAEAAAAMAAIAAgACAAEAAAALAAIAAgACAAEAAAAKAAIAAgACAAEAAAAKAAMAAgACAAIAAAALAAMAAgACAAIAAAAMAAMAAgACAAIAAAANAAMAAgACAAIAAAAOAAMAAgACAAIAAAAPAAQAAgALAAMAAAAPAAUAAgABAAEAAAAQAAUAAgACAAAAAAARAAUAAgADAAAAAAASAAUAAgADAAAAAAATAAIAAgABAAIAAAATAAMAAgABAAAAAAATAAQAAgABAAAAAAATAAUAAgABAAAAAAATAAYAAgABAAAAAAACAAUAAgAHAAAAAAACAAYAAgAHAAEAAAACAAcAAgAHAAIAAAACAAgAAgAHAAMAAAADAAQAAgADAAIAAAACAAQAAgADAAIAAAABAAQAAgADAAIAAAABAAMAAgACAAIAAAACAAMAAgACAAIAAAADAAMAAgACAAIAAAADAAIAAgACAAEAAAACAAIAAgACAAEAAAABAAIAAgACAAEAAAABAAkAAgACAAAAAAACAAkAAgADAAAAAAADAAkAAgADAAAAAAAAAAcAAgAAAAAAAAAAAAgAAgAAAAAAAAATAAcAAgABAAAAAAATAAgAAgABAAAAAAATAAkAAgABAAAAAAATAAoAAgABAAAAAAATAAsAAgABAAAAAAAAAAkAAgAAAAAAAAAAAAoAAgAAAAAAAAAAAAsAAgAAAAAAAAAAAAwAAgAAAAAAAAAEAAkAAgAAAAEAAAAPAAkAAgABAAEAAAARAAkAAgAEAAAAAAARAAoAAgAEAAEAAAARAAsAAgAEAAIAAAARAAwAAgAEAAMAAAAFAAkAAgACAAAAAAAJAAkAAgADAAAAAAAIAAkAAgACAAAAAAALAAkAAgADAAAAAAAMAAkAAgACAAAAAAANAAkAAgACAAAAAAAOAAkAAgADAAAAAAAKAAkAAgADAAAAAAAHAAkAAgADAAAAAAAGAAkAAgADAAAAAAARAAMAAgAAAAQAAAARAAQAAgAAAAUAAAAQAAIAAgACAAEAAAARAAIAAgACAAEAAAASAAIAAgACAAEAAAATAAEAAgADAAEAAAASAAEAAgADAAEAAAARAAEAAgADAAEAAAAQAAEAAgADAAEAAAAPAAEAAgADAAEAAAAOAAEAAgADAAEAAAANAAEAAgADAAEAAAAMAAEAAgADAAEAAAALAAEAAgADAAEAAAAKAAEAAgADAAEAAAAJAAEAAgADAAEAAAAIAAEAAgADAAEAAAAHAAEAAgADAAEAAAAGAAEAAgADAAEAAAAFAAEAAgADAAEAAAAEAAEAAgADAAEAAAADAAEAAgADAAEAAAACAAEAAgADAAEAAAABAAEAAgADAAEAAAAAAAEAAgADAAEAAAAPAAYAAgABAAIAAAAPAAcAAgAKAAIAAAAEAAYAAgAAAAIAAAAEAAcAAgAKAAAAAAAPAAgAAgALAAMAAAAEAAgAAgALAAEAAAASAA0AAgADAAAAAAARAA0AAgACAAAAAAAQAA0AAgADAAAAAAATAAwAAgABAAAAAAATAA0AAgABAAEAAAAPAAoAAgABAAIAAAAOAAoAAgACAAEAAAANAAoAAgACAAEAAAAMAAoAAgACAAEAAAALAAoAAgACAAEAAAAKAAoAAgACAAEAAAAJAAoAAgACAAEAAAAIAAoAAgACAAEAAAAHAAoAAgACAAEAAAAGAAoAAgACAAEAAAAFAAoAAgACAAEAAAAOAAcAAgACAAIAAAANAAcAAgACAAIAAAAMAAcAAgACAAIAAAALAAcAAgACAAIAAAAKAAcAAgACAAIAAAAJAAcAAgACAAIAAAAIAAcAAgACAAIAAAAHAAcAAgACAAIAAAAGAAcAAgACAAIAAAAFAAcAAgACAAIAAAAFAAgAAgADAAIAAAAGAAgAAgADAAIAAAAHAAgAAgADAAIAAAAIAAgAAgADAAIAAAAJAAgAAgADAAIAAAAKAAgAAgADAAIAAAALAAgAAgADAAIAAAAMAAgAAgADAAIAAAANAAgAAgADAAIAAAAOAAgAAgADAAIAAAAOAAsAAgACAAIAAAANAAsAAgACAAIAAAAMAAsAAgACAAIAAAALAAsAAgACAAIAAAAKAAsAAgACAAIAAAAJAAsAAgACAAIAAAAIAAsAAgACAAIAAAAHAAsAAgACAAIAAAAGAAsAAgACAAIAAAAFAAsAAgACAAIAAAAFAAwAAgADAAIAAAAGAAwAAgADAAIAAAAHAAwAAgADAAIAAAAIAAwAAgADAAIAAAAJAAwAAgADAAIAAAAKAAwAAgADAAIAAAALAAwAAgADAAIAAAAMAAwAAgADAAIAAAANAAwAAgADAAIAAAAOAAwAAgADAAIAAAAPAAsAAgAKAAIAAAAPAAwAAgALAAMAAAAEAAoAAgAAAAIAAAAEAAwAAgALAAEAAAAEAAsAAgAKAAAAAAAOAA0AAgADAAAAAAANAA0AAgADAAAAAAAMAA0AAgADAAAAAAAJAA0AAgADAAAAAAAIAA0AAgADAAAAAAAFAA0AAgADAAAAAAAGAA0AAgACAAAAAAAHAA0AAgACAAAAAAALAA0AAgACAAAAAAAKAA0AAgACAAAAAAAPAA0AAgABAAEAAAAEAA0AAgAAAAEAAAADAA0AAgACAAAAAAACAA0AAgADAAAAAAABAA0AAgADAAAAAAAAAA0AAgAAAAEAAAADAAoAAgACAAEAAAACAAoAAgACAAEAAAABAAoAAgACAAEAAAADAAwAAgADAAIAAAACAAwAAgADAAIAAAABAAwAAgADAAIAAAABAAsAAgACAAIAAAACAAsAAgACAAIAAAADAAsAAgACAAIAAAASAAgAAgADAAIAAAARAAgAAgADAAIAAAAQAAgAAgADAAIAAAAQAAcAAgACAAIAAAARAAcAAgACAAIAAAASAAcAAgACAAIAAAAQAAYAAgACAAEAAAARAAYAAgACAAEAAAASAAYAAgACAAEAAAATAA4AAgADAAEAAAASAA4AAgADAAEAAAARAA4AAgADAAEAAAAQAA4AAgADAAEAAAAPAA4AAgADAAEAAAAOAA4AAgADAAEAAAANAA4AAgADAAEAAAAMAA4AAgADAAEAAAALAA4AAgADAAEAAAAKAA4AAgADAAEAAAAJAA4AAgADAAEAAAAIAA4AAgADAAEAAAAHAA4AAgADAAEAAAAGAA4AAgADAAEAAAAFAA4AAgADAAEAAAAEAA4AAgADAAEAAAADAA4AAgADAAEAAAACAA4AAgADAAEAAAABAA4AAgADAAEAAAAAAA4AAgADAAEAAAA=")
 tile_set = SubResource("TileSet_rn1gy")
+collision_enabled = false
+
+[node name="Collision" type="Node" parent="."]
+
+[node name="Walls" type="StaticBody2D" parent="Collision"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collision/Walls"]
+position = Vector2(-307, 31)
+scale = Vector2(1.4857, 21.1499)
+shape = SubResource("RectangleShape2D_orr2t")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Collision/Walls"]
+position = Vector2(-7.00002, 221)
+scale = Vector2(33.0857, 2.94988)
+shape = SubResource("RectangleShape2D_orr2t")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Collision/Walls"]
+position = Vector2(-8, -159)
+scale = Vector2(33.0857, 2.94988)
+shape = SubResource("RectangleShape2D_orr2t")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Collision/Walls"]
+position = Vector2(138, -34)
+scale = Vector2(33.0857, 2.94988)
+shape = SubResource("RectangleShape2D_orr2t")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Collision/Walls"]
+position = Vector2(303, 37)
+scale = Vector2(1.4857, 21.1499)
+shape = SubResource("RectangleShape2D_orr2t")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="Collision/Walls"]
+position = Vector2(-142, 95)
+scale = Vector2(33.0857, 2.94988)
+shape = SubResource("RectangleShape2D_orr2t")
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="Collision/Walls"]
+position = Vector2(174.5, 5)
+shape = SubResource("RectangleShape2D_ujrda")
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="Collision/Walls"]
+position = Vector2(174, 132)
+shape = SubResource("RectangleShape2D_ujrda")
+
+[node name="CollisionShape2D9" type="CollisionShape2D" parent="Collision/Walls"]
+position = Vector2(-178, 132)
+shape = SubResource("RectangleShape2D_ujrda")
+
+[node name="CollisionShape2D10" type="CollisionShape2D" parent="Collision/Walls"]
+position = Vector2(-177, 4)
+shape = SubResource("RectangleShape2D_ujrda")
+
+[node name="CollisionShape2D11" type="CollisionShape2D" parent="Collision/Walls"]
+position = Vector2(-178, -123)
+shape = SubResource("RectangleShape2D_ujrda")
+
+[node name="CollisionShape2D12" type="CollisionShape2D" parent="Collision/Walls"]
+position = Vector2(175, -127)
+shape = SubResource("RectangleShape2D_ujrda")
+
+[node name="Stair1" type="StaticBody2D" parent="Collision"]
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Collision/Stair1"]
+position = Vector2(279, 155)
+shape = SubResource("SegmentShape2D_m5j1g")
+one_way_collision = true
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="Collision/Stair1"]
+position = Vector2(280, 93)
+shape = SubResource("SegmentShape2D_m5j1g")
+one_way_collision = true
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="Collision/Stair1"]
+position = Vector2(228, 130)
+shape = SubResource("SegmentShape2D_2lxdd")
+one_way_collision = true
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="Collision/Stair1"]
+position = Vector2(228, 65)
+shape = SubResource("SegmentShape2D_2lxdd")
+one_way_collision = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collision/Stair1"]
+position = Vector2(219, 130)
+shape = SubResource("SegmentShape2D_chmsy")
+one_way_collision = true
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Collision/Stair1"]
+position = Vector2(219, 66)
+shape = SubResource("SegmentShape2D_chmsy")
+one_way_collision = true
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Collision/Stair1"]
+position = Vector2(282, 99)
+shape = SubResource("SegmentShape2D_chmsy")
+one_way_collision = true
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Collision/Stair1"]
+position = Vector2(282, 162)
+shape = SubResource("SegmentShape2D_chmsy")
+one_way_collision = true
+
+[node name="Stair2" type="StaticBody2D" parent="Collision"]
+position = Vector2(-481, -96)
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Collision/Stair2"]
+position = Vector2(277, 26)
+shape = SubResource("SegmentShape2D_m5j1g")
+one_way_collision = true
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="Collision/Stair2"]
+position = Vector2(280, 93)
+shape = SubResource("SegmentShape2D_m5j1g")
+one_way_collision = true
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="Collision/Stair2"]
+position = Vector2(228, 130)
+shape = SubResource("SegmentShape2D_2lxdd")
+one_way_collision = true
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="Collision/Stair2"]
+position = Vector2(228, 65)
+shape = SubResource("SegmentShape2D_2lxdd")
+one_way_collision = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collision/Stair2"]
+position = Vector2(219, 130)
+shape = SubResource("SegmentShape2D_chmsy")
+one_way_collision = true
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Collision/Stair2"]
+position = Vector2(219, 66)
+shape = SubResource("SegmentShape2D_chmsy")
+one_way_collision = true
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Collision/Stair2"]
+position = Vector2(282, 99)
+shape = SubResource("SegmentShape2D_chmsy")
+one_way_collision = true
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Collision/Stair2"]
+position = Vector2(280, 33)
+shape = SubResource("SegmentShape2D_chmsy")
+one_way_collision = true
+
+[node name="ZombieAngerRange1" type="Area2D" parent="Collision"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collision/ZombieAngerRange1"]
+position = Vector2(-43, 159.5)
+shape = SubResource("RectangleShape2D_fds8i")
+
+[node name="ZombieAngerRange2" type="Area2D" parent="Collision"]
+position = Vector2(211, -145)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collision/ZombieAngerRange2"]
+position = Vector2(-43, 159.5)
+shape = SubResource("RectangleShape2D_fds8i")
+
+[node name="ZombieAngerRange3" type="Area2D" parent="Collision"]
+position = Vector2(-126, -274)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collision/ZombieAngerRange3"]
+position = Vector2(-43, 159.5)
+shape = SubResource("RectangleShape2D_fds8i")
+
+[node name="ZombieSpawnLocations" type="Node" parent="."]
+
+[node name="Zone1" type="Node" parent="ZombieSpawnLocations"]
+
+[node name="Zone2" type="Node" parent="ZombieSpawnLocations"]
+
+[node name="Zone3" type="Node" parent="ZombieSpawnLocations"]
