@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://dr73fsq7sftsd"]
+[gd_scene load_steps=10 format=3 uid="uid://dr73fsq7sftsd"]
 
 [ext_resource type="Script" path="res://character_body_2d.gd" id="1_xp8iq"]
 [ext_resource type="Texture2D" uid="uid://43hkdrl8jf4q" path="res://character/3194-steamhappy.png" id="2_ws2rp"]
 [ext_resource type="Script" path="res://line_2d.gd" id="3_04hox"]
+[ext_resource type="Texture2D" uid="uid://bnoy6b4enjkoy" path="res://character/steamsad.png" id="3_jlx8m"]
 [ext_resource type="Texture2D" uid="uid://ddgcsp2aynhvq" path="res://character/Glock_17_MOD_45154998_(Transparent).png" id="4_p0mi6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3dmhy"]
@@ -23,15 +24,18 @@ script = ExtResource("1_xp8iq")
 
 [node name="BarrelPoint" type="Node2D" parent="."]
 position = Vector2(130, -25)
-scale = Vector2(1, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(0.06, 0.0592308)
 shape = SubResource("RectangleShape2D_3dmhy")
 
-[node name="CursorImage" type="Sprite2D" parent="."]
+[node name="Player1Image" type="Sprite2D" parent="."]
 scale = Vector2(0.550607, 0.473)
 texture = ExtResource("2_ws2rp")
+
+[node name="Player2Image" type="Sprite2D" parent="."]
+scale = Vector2(1, 0.859)
+texture = ExtResource("3_jlx8m")
 
 [node name="Trail" type="Line2D" parent="."]
 show_behind_parent = true

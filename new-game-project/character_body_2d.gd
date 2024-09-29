@@ -3,8 +3,24 @@ extends CharacterBody2D
 var direction
 var facingLeft = false
 
+var spawnPosition
+var inputDict
+var playerId
+
+func _ready():
+	if not inputDict:
+		queue_free()
+	else:
+		if playerId == 1:
+			$Player2Image.queue_free()
+		else:
+			$Player1Image.queue_free()
+		global_position = spawnPosition
+
 func _physics_process(delta):
-	direction = Input.get_vector("P1Left", "P1Right", "P1Up", "P1Down")
+	if not playerId: return
+	
+	direction = Input.get_vector(inputDict.Left, inputDict.Right, inputDict.Up, inputDict.Down)
 	velocity += direction*70
 	velocity *= 0.9
 	move_and_slide()
@@ -48,9 +64,10 @@ var dashCD = false
 var gunCD = false
 
 func _input(event):
+	if not playerId: return
 	
 	##player dashing
-	if event.is_action("P1Dash") and event.is_action_pressed("P1Dash", true, true) and not dashCD:
+	if event.is_action(inputDict.Dash) and event.is_action_pressed(inputDict.Dash, true, true) and not dashCD:
 		if(direction):
 			velocity += direction*800
 		else:
@@ -65,11 +82,13 @@ func _input(event):
 		$Trail.set_meta("enableTrail", false)
 	
 	##player firing a gun
-	if event.is_action("P1Gun") and event.is_action_pressed("P1Gun", true, true) and not gunCD:
+	if event.is_action(inputDict.Gun) and event.is_action_pressed(inputDict.Gun, true, true) and not gunCD:
 		var rotation = PI/2
+		var offsetPosition = $BarrelPoint.position
 		if(facingLeft):
 			rotation = 3*PI/2
+			offsetPosition = Vector2(-offsetPosition.x, offsetPosition.y)
 			
-		shoot(rotation, $BarrelPoint.position+position)
+		shoot(rotation, offsetPosition+position)
 			
 	
