@@ -8,7 +8,6 @@ var inputDict
 var playerId
 
 var speed = 70
-var onGround = true
 
 func _ready():
 	if not inputDict:
@@ -24,12 +23,8 @@ func _physics_process(delta):
 	if not playerId: return
 	
 	direction = Input.get_vector(inputDict.Left, inputDict.Right, inputDict.Up, inputDict.Down)
-	var impulse = direction*15
-	impulse.y = 0
-	velocity += impulse
-	
-	velocity += Vector2(0, 9.8)
-	velocity.x = velocity.x*0.9
+	velocity += direction*70
+	velocity *= 0.9
 	move_and_slide()
 	
 	if(velocity.x > 0):
@@ -49,27 +44,24 @@ func _physics_process(delta):
 		$WalkingParticleEmitter.direction = Vector2(0, -1)
 	#rotation = atan2(velocity.y, velocity.x) + PI/2
 	
-	onGround = is_on_floor()
-		
+	if velocity.length() > 200 :
+		#print(velocity.length())
+		$WalkingParticleEmitter.emitting = true
+		#$WalkingParticleEmitter.amount = clamp(velocity.length()/100, 0, 7)
+	else:
+		$WalkingParticleEmitter.emitting = false
 	
 @onready var projectile = load("res://bullet.tscn")
 @onready var main = get_parent()
 
 func shoot(rotation, position):
-	var rng = RandomNumberGenerator.new()
+	var bullet = projectile.instantiate()
+	bullet.dir = rotation
+	bullet.spawnPosition = position
+	bullet.spawnRotation = rotation
 	
-	
-	for n in range(1,6):
-		var bullet = projectile.instantiate()
-		
-		var randomSpread = deg_to_rad(rng.randf_range(-10.0, 10.0))
-		
-		bullet.dir = rotation + randomSpread
-		bullet.spawnPosition = position
-		bullet.spawnRotation = rotation + randomSpread
-		main.add_child.call_deferred(bullet)
-	
-	
+	main.add_child.call_deferred(bullet)
+
 var dashCD = false
 var gunCD = false
 
@@ -104,30 +96,22 @@ func _input(event):
 	if not playerId: return
 	
 	##player dashing
-	#if event.is_action(inputDict.Dash) and event.is_action_pressed(inputDict.Dash, true, true) and not dashCD:
-		#if(direction):
-			#velocity += direction*800
-		#else:
-			#if(facingLeft):
-				#velocity += Vector2(-800, 0)
-			#else:
-				#velocity += Vector2(800, 0)
-		#dashCD = true
-		#$Trail.set_meta("enableTrail", true)
-		#await get_tree().create_timer(0.4).timeout
-		#dashCD = false
-		#$Trail.set_meta("enableTrail", false)
-	
-	#player jumping
-	if event.is_action(inputDict.Up) and event.is_action_pressed(inputDict.Up, true, true) and onGround == true:
-		velocity += Vector2(0, -200)
-		onGround = false
-		
+	if event.is_action(inputDict.Dash) and event.is_action_pressed(inputDict.Dash, true, true) and not dashCD:
+		if(direction):
+			velocity += direction*800
+		else:
+			if(facingLeft):
+				velocity += Vector2(-800, 0)
+			else:
+				velocity += Vector2(800, 0)
+		dashCD = true
+		$Trail.set_meta("enableTrail", true)
+		await get_tree().create_timer(0.4).timeout
+		dashCD = false
+		$Trail.set_meta("enableTrail", false)
 	
 	##player firing a gun
 	if event.is_action(inputDict.Gun) and event.is_action_pressed(inputDict.Gun, true, true) and not gunCD:
-		
-		gunCD = true
 		var rotation = PI/2
 		var offsetPosition = $BarrelPoint.position
 		if(facingLeft):
@@ -135,11 +119,9 @@ func _input(event):
 			offsetPosition = Vector2(-offsetPosition.x, offsetPosition.y)
 			
 		shoot(rotation, offsetPosition+position)
-		
-		await get_tree().create_timer(1.4).timeout
-		gunCD = false
 			
 	
 signal kill
 func _exit_tree() -> void:
+	print("YES")
 	kill.emit(playerId)

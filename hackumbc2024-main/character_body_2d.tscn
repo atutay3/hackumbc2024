@@ -1,13 +1,96 @@
-[gd_scene load_steps=10 format=3 uid="uid://dr73fsq7sftsd"]
+[gd_scene load_steps=16 format=3 uid="uid://dr73fsq7sftsd"]
 
 [ext_resource type="Script" path="res://character_body_2d.gd" id="1_xp8iq"]
-[ext_resource type="Texture2D" uid="uid://43hkdrl8jf4q" path="res://character/3194-steamhappy.png" id="2_ws2rp"]
+[ext_resource type="Texture2D" uid="uid://bcbuijistnvs0" path="res://character/zombieSwarm_Sprites.png" id="2_xttkb"]
 [ext_resource type="Script" path="res://line_2d.gd" id="3_04hox"]
 [ext_resource type="Texture2D" uid="uid://bnoy6b4enjkoy" path="res://character/steamsad.png" id="3_jlx8m"]
 [ext_resource type="Texture2D" uid="uid://ddgcsp2aynhvq" path="res://character/Glock_17_MOD_45154998_(Transparent).png" id="4_p0mi6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3dmhy"]
 size = Vector2(405.813, 520.489)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qft0y"]
+atlas = ExtResource("2_xttkb")
+region = Rect2(32, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ttpso"]
+atlas = ExtResource("2_xttkb")
+region = Rect2(32, 16, 32, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ajmcx"]
+animations = [{
+"frames": [{
+"duration": 4.0,
+"texture": SubResource("AtlasTexture_qft0y")
+}, {
+"duration": 4.0,
+"texture": SubResource("AtlasTexture_ttpso")
+}],
+"loop": true,
+"name": &"p1 move",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_xyu7t"]
+resource_name = "walk p1"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"p1 move"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="Animation" id="Animation_irdaq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"p1 move"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_r8b1v"]
+_data = {
+"RESET": SubResource("Animation_irdaq"),
+"walk p1": SubResource("Animation_xyu7t")
+}
 
 [sub_resource type="Curve" id="Curve_nqa3y"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0488599, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -21,22 +104,33 @@ metadata/_snap_enabled = true
 
 [node name="PlayerCharacter" type="CharacterBody2D"]
 script = ExtResource("1_xp8iq")
-metadata/Player = true
 
 [node name="BarrelPoint" type="Node2D" parent="."]
-position = Vector2(60, -12)
-scale = Vector2(-237.099, 16.6747)
+position = Vector2(130, -25)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(0.06, 0.0592308)
 shape = SubResource("RectangleShape2D_3dmhy")
 
 [node name="Player1Image" type="Sprite2D" parent="."]
-scale = Vector2(0.190608, 0.193)
-texture = ExtResource("2_ws2rp")
+scale = Vector2(0.550607, 0.473)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player1Image"]
+scale = Vector2(10, 10)
+sprite_frames = SubResource("SpriteFrames_ajmcx")
+animation = &"p1 move"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Player1Image/AnimatedSprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_r8b1v")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="Player1Image/AnimatedSprite2D"]
+anim_player = NodePath("../AnimationPlayer")
 
 [node name="Player2Image" type="Sprite2D" parent="."]
-scale = Vector2(0.360001, 0.339)
+visible = false
+scale = Vector2(1, 0.859)
 texture = ExtResource("3_jlx8m")
 
 [node name="Trail" type="Line2D" parent="."]
@@ -67,7 +161,7 @@ initial_velocity_max = 108.28
 
 [node name="GunImage" type="Sprite2D" parent="."]
 z_index = -38
-scale = Vector2(0.0768884, 0.0845611)
+scale = Vector2(0.167272, 0.176924)
 texture = ExtResource("4_p0mi6")
 offset = Vector2(500, 0)
 
