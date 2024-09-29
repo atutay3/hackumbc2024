@@ -83,10 +83,11 @@ func damage(amount):
 		call_deferred("queue_free")
 	
 		var particles = $DeathParticleEmitter
+		particles = particles.duplicate()
 		if particles:
 			particles.emitting = true
 			
-			remove_child(particles)
+			#remove_child(particles)
 			particles.position = position
 			get_parent().add_child(particles)
 			await get_tree().create_timer(particles.lifetime).timeout
